@@ -63,7 +63,7 @@ const Story = () => {
                 <div className="story-img-container">
                     <div className="story-img-mask">
                         <div className="story-img-content">
-                            <img
+                            <img 
                             ref={frameRef}
                             onMouseLeave={handleMouseLeave}
                             onMouseUp = {handleMouseLeave}
