@@ -73,7 +73,7 @@ export default function Index() {
             <div className={styles.projectDescription}>
                 <div ref={imageContainer} className={styles.imageContainer}>
                     <img
-                        src={`/images/${projects[selectedProject].src}`}
+                        src={`/${projects[selectedProject].src}`}
                         alt="project image"
                     />
                 </div>

@@ -49,7 +49,7 @@ export default function Index() {
     return (
         <div className={styles.homeHeader}>
             <div className={styles.backgroundImage} ref={background}>
-                <img src={'/images/background.jpeg'} alt="background image" />
+                <img src={'/background.jpeg'} alt="background image" />
             </div>
             <div className={styles.intro}>
                 <div
@@ -58,7 +58,7 @@ export default function Index() {
                     data-scroll-speed="0.9"
                     className={styles.introImage}
                 >
-                    <img src={'/images/intro.png'} alt="intro image" />
+                    <img src={'/intro.png'} alt="intro image" />
                 </div>
                 <h1
                     ref={introText}
