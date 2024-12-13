@@ -33,14 +33,14 @@ export default function Index() {
     useLayoutEffect(() => {
         const imageTrigger = ScrollTrigger.create({
             trigger: imageContainer.current,
-            start: "top 100px", // Trigger image pinning slightly later
-            end: "+=920", // Extend the end to make text scrollable for longer
+            start: "top 120px", // Trigger image pinning slightly later
+            end: "+=1100", // Extend the end to make text scrollable for longer
             pin: true,
             pinSpacing: false,
             onEnter: () => {
                 gsap.to(imageContainer.current, {
                     position: "fixed",
-                    top: "150px",
+                    top: "120px",
                     duration: 0.3,
                     ease: "power2.out",
                 });

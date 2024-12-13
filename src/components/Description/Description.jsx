@@ -26,6 +26,7 @@ function AnimatedText({ children }) {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
+
     gsap.fromTo(
       text.current,
       { opacity: 0, x: -200 }, // Initial state
@@ -33,11 +34,13 @@ function AnimatedText({ children }) {
         opacity: 1,
         x: 0,
         ease: "power3.out",
+        duration: 1.5, // Smooth animation duration
         scrollTrigger: {
           trigger: text.current,
-          scrub: true,
-          start: "top bottom",
-          end: "top top", // Syncing scroll and animation
+          scrub: 1, // Smooth scrubbing
+          start: "top bottom", // When the element enters the viewport
+          end: "top top", // When the element aligns with the top of the viewport
+          toggleActions: "play none none reverse", // Ensures smooth playback
         },
       }
     );

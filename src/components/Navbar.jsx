@@ -73,7 +73,7 @@ useEffect (() => {
             {/* Logo on left */}
             <div className = "flex items-center gap-7">
                 <img
-                src="/img/logo.png" alt="LOGO" className="w-10"/>
+                src="/intro.png" alt="LOGO" className="w-10 rounded-full"/>
           
                 <Button
                 id="product-button"

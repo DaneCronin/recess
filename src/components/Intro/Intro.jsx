@@ -17,9 +17,8 @@ export default function Index() {
             scrollTrigger: {
                 trigger: background.current, // Target background div
                 scrub: true, // Sync with scroll
-                start: "top-=100px", // Animation starts when the top of the element hits the center of the viewport
+                start: "top center", // Animation starts when the top of the element hits the center of the viewport
                 end: "bottom bottom", // Animation ends when the bottom of the element hits the center
-                markers: true, // Optional for debugging
             },
         });
 

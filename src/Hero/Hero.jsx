@@ -15,7 +15,7 @@ export default function Hero({ paragraph }) {
   const words = paragraph.split(" ");
 
   return (
-    <div className="w-screen h-screen">
+    <div className="w-3/4 h-screen mb-0 pl-8" >
     <p ref={container} className={styles.paragraph}>
       {words.map((word, i) => {
         const start = i / words.length;

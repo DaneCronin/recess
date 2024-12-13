@@ -42,7 +42,7 @@ export default function Curve() {
 
   const animateOut = () => {
     const newProgress = progress * Math.sin(time);
-    progress = lerp(progress, 0, 0.1);
+    progress = lerp(progress, 0, 0.025);
     time+=0.2;
     setPath(newProgress);
     if(Math.abs(progress) > 0.75){
