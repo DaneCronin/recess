@@ -1,0 +1,12 @@
+.description{
+    position: relative;
+    color: white;
+    font-size: 3vw;
+    margin-top: 10vh;
+    text-transform: uppercase;
+    margin-left: 10vw;
+}
+.description p{
+    margin: 0px;
+    position: relative;
+}
