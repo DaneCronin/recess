@@ -1,0 +1,112 @@
+.main {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000; /* Higher than other components */
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent background */
+  }
+  
+  .header {
+    padding: 30px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1050;
+  }
+  
+  .button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #455ce9;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: width 0.3s ease, height 0.3s ease;
+  }
+  
+  .burger {
+    position: relative;
+    width: 40px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.3s ease;
+  }
+  
+  .burger::before,
+  .burger::after {
+    content: '';
+    position: absolute;
+    width: 40px;
+    height: 3px;
+    background-color: white;
+    transition: transform 0.3s ease, top 0.3s ease;
+  }
+  
+  .burger::before {
+    top: -10px;
+  }
+  
+  .burger::after {
+    top: 10px;
+  }
+  
+  .burgerActive {
+    background-color: transparent;
+  }
+  
+  .burgerActive::before {
+    transform: rotate(45deg) translate(2px, -2px); /* Fix alignment */
+    top: 0;
+  }
+  
+  .burgerActive::after {
+    transform: rotate(-45deg) translate(2px, -2px); /* Fix alignment */
+    top: 0;
+  }
+  
+  /* Prevent body scrolling */
+  body.no-scroll {
+    overflow: hidden;
+  }
+  
+  /* Responsive Button Adjustments */
+  @media (max-width: 768px) {
+    .button {
+      width: 50px; /* Smaller button for small devices */
+      height: 50px;
+    }
+  
+    .burger {
+      width: 25px;
+      height: 2px;
+    }
+  
+    .burger::before,
+    .burger::after {
+      width: 25px;
+      height: 2px;
+    }
+  
+    .burger::before {
+      top: -6px; /* Adjust spacing */
+    }
+  
+    .burger::after {
+      top: 6px; /* Adjust spacing */
+    }
+  
+    .burgerActive::before {
+      transform: rotate(45deg) translate(1px, 1px); /* Adjust alignment for small screen */
+      top: 0;
+    }
+  
+    .burgerActive::after {
+      transform: rotate(-45deg) translate(1px, -1px); /* Adjust alignment for small screen */
+      top: 0;
+    }
+  }
+  

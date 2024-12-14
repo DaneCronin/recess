@@ -1,45 +1,52 @@
-import React from 'react'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Hero from './Hero/Hero';
 import About from './components/About';
-import Navbar from './components/Navbar';
 import Features from './components/Features';
 import Projects from './components/Story';
 import Contact from './components/Contact';
 import SmoothScroll from './components/SmoothScroll';
 import Curve from './components/SVGBezierCurve/Curve';
 import MouseScaleMain from './components/MouseScaleMain/MouseScaleMain';
-import TextDipserse from './components/TextDisperse/TextDisperse';
 import MainComponent from './components/TextDisperse/TextDisperse';
 import Footer from './components/StickyNotes/StickyFooter';
-
-// import Footer from './components/Footer';
+import Header from './components/header';
 
 
 const App = () => {
-  const paragraph ='It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ';
-  
-  // Add a state to track screen size
-  const [isSmallScreen, setIsSmallScreen] = React.useState(window.innerWidth < 768);
+  const paragraph =
+    'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.';
+  const [isHeaderActive, setIsHeaderActive] = React.useState(false);
 
-  // Update the state on window resize
+  // Effect to disable scrolling when header is active
   React.useEffect(() => {
-    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    document.body.style.overflow = isHeaderActive ? 'hidden' : 'auto';
+  }, [isHeaderActive]);
 
   return (
-  <main>
-    <Navbar/>
-    <Hero paragraph={paragraph}/>
-    <SmoothScroll/>
-    {/* Conditionally render Curve based on screen size */}
-    {!isSmallScreen && <Curve/>}
-    <MouseScaleMain/>
-    <MainComponent/>
-    <Footer/>
-  </main>
-  )
-}
+    <Router>
+      <div style={{ position: 'relative' }}>
+        {/* Header */}
+        <Header setIsHeaderActive={setIsHeaderActive} isActive={isHeaderActive} />
 
-export default App
+        {/* Main content */}
+        <main style={{ opacity: isHeaderActive ? 0.3 : 1, transition: 'opacity 0.3s' }}>
+          <Routes>
+            <Route path="/" element={<Hero paragraph={paragraph} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/features" element={<Features />} />
+            <Route path="/projects" element={<Projects />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+          <SmoothScroll />
+          <Curve />
+          <MouseScaleMain />
+          <MainComponent />
+          <Footer />
+        </main>
+      </div>
+    </Router>
+  );
+};
+
+export default App;
