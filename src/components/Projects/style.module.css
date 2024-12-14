@@ -32,7 +32,8 @@
 
 .column:last-of-type{
     align-items: flex-end;
-    font-size: 1vw;
+    width: 30%;
+    font-size: 1.6vw;
 }
 
 .projectList{
