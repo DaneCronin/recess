@@ -17,12 +17,24 @@ import Footer from './components/StickyNotes/StickyFooter';
 
 const App = () => {
   const paragraph ='It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. ';
+  
+  // Add a state to track screen size
+  const [isSmallScreen, setIsSmallScreen] = React.useState(window.innerWidth < 768);
+
+  // Update the state on window resize
+  React.useEffect(() => {
+    const handleResize = () => setIsSmallScreen(window.innerWidth < 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
   <main>
     <Navbar/>
     <Hero paragraph={paragraph}/>
     <SmoothScroll/>
-    <Curve/>
+    {/* Conditionally render Curve based on screen size */}
+    {!isSmallScreen && <Curve/>}
     <MouseScaleMain/>
     <MainComponent/>
     <Footer/>

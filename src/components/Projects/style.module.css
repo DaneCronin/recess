@@ -57,3 +57,10 @@
     margin-bottom: 45px;
     cursor: default;
 }
+
+@media (max-width: 600px) {
+    .column p {
+        font-size: 1.2em;
+        margin-right: 10px;
+    }
+}
