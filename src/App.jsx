@@ -39,10 +39,8 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
           </Routes>
           <SmoothScroll />
-          <Curve />
           <MouseScaleMain />
           <MainComponent />
-          <Footer />
         </main>
       </div>
     </Router>
