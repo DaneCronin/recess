@@ -6,35 +6,65 @@ export default function Hero({ paragraph }) {
   const container = useRef(null);
 
   const scrollProgress = useMotionValue(0);
-  const [scrollEnabled, setScrollEnabled] = useState(false); // State to toggle scrolling
+  const [isFullyVisible, setIsFullyVisible] = useState(false); // Tracks if text is fully in viewport
+  const [scrollEnabled, setScrollEnabled] = useState(false); // To control scroll enablement
 
   const words = paragraph.split(" ");
+
+  useEffect(() => {
+    const checkVisibility = () => {
+      const rect = container.current.getBoundingClientRect();
+      const isVisible =
+        rect.top >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight);
+      setIsFullyVisible(isVisible);
+    };
+
+    // Observer to detect container visibility
+    const observer = new ResizeObserver(checkVisibility);
+    if (container.current) observer.observe(container.current);
+
+    window.addEventListener("scroll", checkVisibility);
+    return () => {
+      if (container.current) observer.unobserve(container.current);
+      window.removeEventListener("scroll", checkVisibility);
+    };
+  }, []);
 
   useEffect(() => {
     const handleScroll = (event) => {
       const delta = event.deltaY || event.wheelDelta || -event.detail;
 
-      if (scrollEnabled) {
-        // Enable reverse custom scrolling if scrolling up and progress is not fully reversed
-        if (scrollProgress.get() > 0 && delta < 0) {
-          setScrollEnabled(false); // Re-enable custom scroll
-        }
-      } else {
-        // Custom scroll logic
-        event.preventDefault(); // Prevent default page scroll
-        const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + delta * 0.001));
-        scrollProgress.set(newScroll);
+      if (!isFullyVisible || scrollEnabled) {
+        return; // Allow normal scrolling if the text is not fully in viewport or scroll is enabled
+      }
 
-        // Enable default scrolling when fully colored
-        if (newScroll === 1 && delta > 0) {
-          setScrollEnabled(true);
-        }
+      event.preventDefault(); // Prevent default page scroll
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + delta * 0.001));
+      scrollProgress.set(newScroll);
+
+      // Enable regular scroll once text is fully filled
+      if (newScroll === 1) {
+        setScrollEnabled(true);
       }
     };
 
     window.addEventListener("wheel", handleScroll, { passive: false });
     return () => window.removeEventListener("wheel", handleScroll);
-  }, [scrollProgress, scrollEnabled]);
+  }, [scrollProgress, isFullyVisible, scrollEnabled]);
+
+  useEffect(() => {
+    if (scrollEnabled) {
+      // Re-enable default page scrolling
+      const resetScroll = (event) => {
+        if (!scrollEnabled) {
+          event.preventDefault(); // Prevent scrolling when disabled
+        }
+      };
+      window.addEventListener("wheel", resetScroll);
+      return () => window.removeEventListener("wheel", resetScroll);
+    }
+  }, [scrollEnabled]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center overflow-hidden">

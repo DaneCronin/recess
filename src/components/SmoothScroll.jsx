@@ -17,7 +17,7 @@ export default function SmoothScroll() {
   }, [])
 
   return (
-      <main className='flex flex-col gap-0' >
+      <main className='' >
         <Index />
         <Description />
         <Projects/>

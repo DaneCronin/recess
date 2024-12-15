@@ -77,6 +77,7 @@ export default function Index() {
                         alt="project image"
                     />
                 </div>
+                
                 <div className={styles.column}>
                     <p>
                         The flora is characterized by the presence of high elevation wetland, as

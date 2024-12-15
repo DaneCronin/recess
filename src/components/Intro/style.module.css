@@ -55,3 +55,16 @@
     width: 100%;
     height: 100%;
 }
+@media (max-width: 480px) {
+   
+    .introImage {
+        width: 60%; /* Further reduce the size of the image */
+        max-width: 150px; 
+        height: 60%;
+        object-fit: cover;/* Proportional scaling */
+    }
+
+    .intro h1 {
+        font-size: 10vw; /* Scale down font size further */
+    }
+}

@@ -12,37 +12,56 @@ export default function Index() {
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
-        // Adjust ScrollTrigger to limit animation to its parent viewport
-        const timeline = gsap.timeline({
+        // Animation for the background
+        gsap.timeline({
             scrollTrigger: {
                 trigger: background.current, // Target background div
                 scrub: true, // Sync with scroll
-                start: "top center", // Animation starts when the top of the element hits the center of the viewport
-                end: "bottom bottom", // Animation ends when the bottom of the element hits the center
+                start: "top +=100", // Start when top of the element hits the center
+                end: "+=300px", // End when bottom of the element hits the top
+                invalidateOnRefresh: true, // Refresh on resize
             },
-        });
+        })
+        .fromTo(
+            background.current,
+            { clipPath: `inset(15%)` }, // Initial state
+            { clipPath: `inset(0%)` } // Final state
+        );
 
-        timeline
-            // Expand background to cover only the viewport it's visible in
-            .fromTo(
-                background.current,
-                { clipPath: `inset(15%)` }, // Initial state
-                { clipPath: `inset(0%)` } // Final state
-            )
-            // Slide intro image up
-            .fromTo(
-                introImage.current,
-                { y: "0%",opacity:1 }, // Initial position
-                { y: "-100%",opacity:0 }, // Slide up
-                0 // Synchronized with background animation
-            )
-            // Fade out intro text
-            .fromTo(
-                introText.current,
-                { opacity: 1 },
-                { opacity: 0 },
-                "<" // Start with the previous animation
-            );
+        // Animation for the introImage
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: introImage.current, // Target introImage div
+                scrub: true, // Sync with scroll
+                start: "top center-=150", // Start when top of the element enters the viewport
+                end: "bottom top+=300", // End when top of the element reaches the top
+                invalidateOnRefresh: true, // Refresh on resize
+            },
+        })
+        .fromTo(
+            introImage.current,
+            { y: "0%", opacity: 1, scale: 1 }, // Initial position
+            { y: "-100%", opacity: 0, scale: 0.95 } // Final state
+        );
+
+        // Animation for the introText
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: introText.current, // Target introText
+                scrub: true, // Sync with scroll
+                start: "top center", // Start when top of the element enters the viewport
+                end: "bottom top+=200", // End when top of the element reaches the center
+                invalidateOnRefresh: true, // Refresh on resize
+            },
+        })
+        .fromTo(
+            introText.current,
+            { opacity: 1 }, // Initial state
+            { opacity: 0 } // Final state
+        );
+
+        // Ensure the animations sync properly with the scroll
+        ScrollTrigger.refresh();
     }, []);
 
     return (
@@ -53,16 +72,12 @@ export default function Index() {
             <div className={styles.intro}>
                 <div
                     ref={introImage}
-                    data-scroll
-                    data-scroll-speed="0.9"
                     className={styles.introImage}
                 >
                     <img src={'/intro.png'} alt="intro image" />
                 </div>
                 <h1
                     ref={introText}
-                    data-scroll
-                    data-scroll-speed="0.9"
                 >
                     SMOOTH SCROLL
                 </h1>
