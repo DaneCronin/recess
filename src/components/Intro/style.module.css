@@ -60,7 +60,7 @@
     .introImage {
         width: 60%; /* Further reduce the size of the image */
         max-width: 150px; 
-        height: 60%;
+        height: 40%;
         object-fit: cover;/* Proportional scaling */
     }
 
