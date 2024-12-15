@@ -25,21 +25,6 @@ const App = () => {
     document.body.style.overflow = isHeaderActive ? "hidden" : "auto";
   }, [isHeaderActive]);
 
-  // Effect to detect screen size
-  React.useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
-    };
-
-    // Initial check
-    checkMobile();
-
-    // Add resize event listener
-    window.addEventListener("resize", checkMobile);
-
-    // Cleanup
-    return () => window.removeEventListener("resize", checkMobile);
-  }, []);
 
   const projects = [
     { id: 1, title1: "Jomor", title2: "Design", src: "jomor_design.jpeg" },
@@ -86,8 +71,7 @@ const App = () => {
       </div>
       <SlidingImage />
       
-      {/* Conditional Rendering of Contact Component */}
-      {!isMobile && <Contact />}
+      <Contact/>
     </Router>
   );
 };
