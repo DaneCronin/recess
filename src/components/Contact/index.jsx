@@ -21,7 +21,7 @@ export default function Contact() {
                     <span>
                         <div className={styles.imageContainer}>
                             <img
-                           objectFill={true}
+                           object-fit={"fill"}
                             alt={"image"}
                             src={`/images/background.jpg`}
                             />

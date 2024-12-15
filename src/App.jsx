@@ -5,9 +5,7 @@ import Hero from "./Hero/Hero";
 import About from "./components/About";
 import Features from "./components/Features";
 import Projects from "./components/Story";
-
 import SmoothScroll from "./components/SmoothScroll";
-import Curve from "./components/SVGBezierCurve/Curve";
 import MouseScaleMain from "./components/MouseScaleMain/MouseScaleMain";
 import MainComponent from "./components/TextDisperse/TextDisperse";
 import Footer from "./components/StickyNotes/StickyFooter";
@@ -20,43 +18,35 @@ const App = () => {
   const paragraph =
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
   const [isHeaderActive, setIsHeaderActive] = React.useState(false);
+  const [isMobile, setIsMobile] = React.useState(false);
 
   // Effect to disable scrolling when header is active
   React.useEffect(() => {
     document.body.style.overflow = isHeaderActive ? "hidden" : "auto";
   }, [isHeaderActive]);
 
+  // Effect to detect screen size
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768); // Adjust breakpoint as needed
+    };
+
+    // Initial check
+    checkMobile();
+
+    // Add resize event listener
+    window.addEventListener("resize", checkMobile);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   const projects = [
-    {
-      id:1,
-      title1: "Jomor",
-      title2: "Design",
-      src: "jomor_design.jpeg",
-    },
-    {
-      id:2,
-      title1: "La",
-      title2: "Grange",
-      src: "la_grange.jpeg",
-    },
-    {
-      id:3,
-      title1: "Deux Huit",
-      title2: "Huit",
-      src: "deux_huit_huit.jpeg",
-    },
-    {
-      id:4,
-      title1: "Nothing",
-      title2: "Design Studio",
-      src: "nothing_design_studio.png",
-    },
-    {
-      id:5,
-      title1: "Mambo",
-      title2: "Mambo",
-      src: "mambo_mambo.jpeg",
-    },
+    { id: 1, title1: "Jomor", title2: "Design", src: "jomor_design.jpeg" },
+    { id: 2, title1: "La", title2: "Grange", src: "la_grange.jpeg" },
+    { id: 3, title1: "Deux Huit", title2: "Huit", src: "deux_huit_huit.jpeg" },
+    { id: 4, title1: "Nothing", title2: "Design Studio", src: "nothing_design_studio.png" },
+    { id: 5, title1: "Mambo", title2: "Mambo", src: "mambo_mambo.jpeg" },
   ];
 
   return (
@@ -80,25 +70,24 @@ const App = () => {
             <Route path="/about" element={<About />} />
             <Route path="/features" element={<Features />} />
             <Route path="/projects" element={<Projects />} />
-            
           </Routes>
           <SmoothScroll />
           <div className={styles.main}>
-          <div className={styles.gallery}>
-            <p>Featured Work</p>
-            {projects.map((project) => {
-              return <ImageSlider project={project} />;
-            })}
-          </div>
+            <div className={styles.gallery}>
+              <p>Featured Work</p>
+              {projects.map((project) => {
+                return <ImageSlider key={project.id} project={project} />;
+              })}
+            </div>
           </div>
           <MouseScaleMain />
           <MainComponent />
         </main>
       </div>
-      <SlidingImage/>
+      <SlidingImage />
       
-      <Contact/>
-    
+      {/* Conditional Rendering of Contact Component */}
+      {!isMobile && <Contact />}
     </Router>
   );
 };

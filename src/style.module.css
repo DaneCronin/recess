@@ -9,3 +9,9 @@
     margin-top: 10vh;
     margin-bottom: 30vh;
   }
+  @media (max-width: 768px) {
+    .hideOnMobile {
+      display: none;
+    }
+  }
+  

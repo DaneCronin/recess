@@ -61,7 +61,7 @@ export default function SlidingImage() {
                             return <div key={index} className={styles.project} style={{backgroundColor: project.color}} >
                                 <div className={styles.imageContainer}>
                                     <img
-                                objectFill={true}
+                                object-fit={"fill"}
                                     alt={"image"}
                                     src={`/images/${project.src}`}/>
                                 </div>
@@ -75,7 +75,7 @@ export default function SlidingImage() {
                             return <div key={index} className={styles.project} style={{backgroundColor: project.color}} >
                                 <div key={index} className={styles.imageContainer}>
                                     <img
-                                    objectFill={true}
+                                  object-fit={"fill"}
                                     alt={"image"}
                                     src={`/images/${project.src}`}/>
                                 </div>
