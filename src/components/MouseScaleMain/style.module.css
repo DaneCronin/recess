@@ -40,5 +40,10 @@
       font-size: 7vw; /* Increase font size for smaller screens */
       padding: 10px; /* Compact padding for better layout */
     }
+   .gallery{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+   }
   }
 }
