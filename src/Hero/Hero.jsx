@@ -62,6 +62,10 @@ export default function Hero({ paragraph }) {
       const currentY = event.touches[0].clientY;
       touchDelta = startY - currentY; // Calculate vertical swipe delta
 
+      if (!scrollEnabled) {
+        event.preventDefault(); // Prevent default scrolling when the text is not fully revealed
+      }
+
       const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.001));
       scrollProgress.set(newScroll);
 
@@ -87,19 +91,6 @@ export default function Hero({ paragraph }) {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [scrollProgress, isFullyVisible, scrollEnabled]);
-
-  useEffect(() => {
-    if (scrollEnabled) {
-      // Re-enable default page scrolling
-      const resetScroll = (event) => {
-        if (!scrollEnabled) {
-          event.preventDefault(); // Prevent scrolling when disabled
-        }
-      };
-      window.addEventListener("wheel", resetScroll);
-      return () => window.removeEventListener("wheel", resetScroll);
-    }
-  }, [scrollEnabled]);
 
   return (
     <div className="w-full h-screen flex justify-center items-center overflow-hidden">
