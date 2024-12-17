@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styles from './style.module.css';
 import Hero from "./Hero/Hero";
@@ -13,18 +13,28 @@ import Header from "./components/header";
 import ImageSlider from "./components/ImageSlideProjectGallery/ImageSlideProject";
 import SlidingImage from "./components/SlidingImages";
 import Contact from "./components/Contact";
+import Loader from "./components/Loader";
 
 const App = () => {
   const paragraph =
     "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
-  const [isHeaderActive, setIsHeaderActive] = React.useState(false);
-  const [isMobile, setIsMobile] = React.useState(false);
+  const [isHeaderActive, setIsHeaderActive] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isLoading, setIsLoading] = useState(true); // Loading state
 
-  // Effect to disable scrolling when header is active
-  React.useEffect(() => {
+  // Simulate loading process
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Finish loading after 3 seconds (simulate resources loaded)
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Disable scrolling when header is active
+  useEffect(() => {
     document.body.style.overflow = isHeaderActive ? "hidden" : "auto";
   }, [isHeaderActive]);
-
 
   const projects = [
     { id: 1, title1: "Jomor", title2: "Design", src: "jomor_design.jpeg" },
@@ -34,15 +44,16 @@ const App = () => {
     { id: 5, title1: "Mambo", title2: "Mambo", src: "mambo_mambo.jpeg" },
   ];
 
+  // Render loader if still loading
+  if (isLoading) {
+    return <Loader />;
+  }
+
   return (
     <Router>
       <div style={{ position: "relative" }}>
         {/* Header */}
-        <Header
-          setIsHeaderActive={setIsHeaderActive}
-          isActive={isHeaderActive}
-          
-        />
+        <Header setIsHeaderActive={setIsHeaderActive} isActive={isHeaderActive} />
 
         {/* Main content */}
         <main
@@ -51,13 +62,13 @@ const App = () => {
             transition: "opacity 0.3s",
           }}
         >
-          
           <Routes>
             <Route path="/" element={<Hero paragraph={paragraph} />} />
             <Route path="/about" element={<About />} />
             <Route path="/features" element={<Features />} />
             <Route path="/projects" element={<Projects />} />
           </Routes>
+
           <SmoothScroll />
           <div className={styles.main}>
             <div className={styles.gallery}>
@@ -69,11 +80,9 @@ const App = () => {
           </div>
           <MouseScaleMain />
           <SlidingImage />
-      
-      <Contact/>
+          <Contact />
         </main>
       </div>
-      
     </Router>
   );
 };
