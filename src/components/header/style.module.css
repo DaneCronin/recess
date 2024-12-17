@@ -78,6 +78,7 @@
     .button {
       width: 50px; /* Smaller button for small devices */
       height: 50px;
+      margin-right: 20px;
     }
   
     .burger {

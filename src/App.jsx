@@ -41,6 +41,7 @@ const App = () => {
         <Header
           setIsHeaderActive={setIsHeaderActive}
           isActive={isHeaderActive}
+          
         />
 
         {/* Main content */}
