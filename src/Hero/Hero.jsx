@@ -1,6 +1,6 @@
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
-import styles from './style.module.css';
+import styles from "./style.module.css";
 
 export default function Hero({ paragraph }) {
   const container = useRef(null);
@@ -43,7 +43,7 @@ export default function Hero({ paragraph }) {
       }
 
       event.preventDefault(); // Prevent default page scroll
-      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + delta * 0.001));
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + delta * 0.001)); // Slower progression
       scrollProgress.set(newScroll);
 
       // Enable regular scroll once text is fully filled
@@ -60,13 +60,13 @@ export default function Hero({ paragraph }) {
       if (!isFullyVisible || scrollEnabled) return;
 
       const currentY = event.touches[0].clientY;
-      touchDelta = startY - 2*currentY; // Calculate vertical swipe delta
+      touchDelta = startY - currentY; // Calculate vertical swipe delta
 
       if (!scrollEnabled) {
         event.preventDefault(); // Prevent default scrolling when the text is not fully revealed
       }
 
-      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.001));
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.00025)); // Slower progression
       scrollProgress.set(newScroll);
 
       // Enable regular scroll once text is fully filled
