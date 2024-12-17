@@ -67,12 +67,12 @@ const App = () => {
             </div>
           </div>
           <MouseScaleMain />
-         
-        </main>
-      </div>
-      <SlidingImage />
+          <SlidingImage />
       
       <Contact/>
+        </main>
+      </div>
+      
     </Router>
   );
 };
