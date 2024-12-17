@@ -66,7 +66,7 @@ export default function Hero({ paragraph }) {
         event.preventDefault(); // Prevent default scrolling when the text is not fully revealed
       }
 
-      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.00025)); // Slower progression
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.0005)); // Slower progression
       scrollProgress.set(newScroll);
 
       // Enable regular scroll once text is fully filled
