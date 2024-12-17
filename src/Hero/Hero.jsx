@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./style.module.css";
 
@@ -6,8 +6,12 @@ export default function Hero({ paragraph }) {
   const container = useRef(null);
 
   const scrollProgress = useMotionValue(0);
-  const [isFullyVisible, setIsFullyVisible] = useState(false); // Tracks if text is fully in viewport
-  const [scrollEnabled, setScrollEnabled] = useState(false); // To control scroll enablement
+  const smoothScrollProgress = useSpring(scrollProgress, {
+    stiffness: 50,
+    damping: 20,
+  });
+  const [isFullyVisible, setIsFullyVisible] = useState(false);
+  const [scrollEnabled, setScrollEnabled] = useState(false);
 
   const words = paragraph.split(" ");
 
@@ -20,7 +24,6 @@ export default function Hero({ paragraph }) {
       setIsFullyVisible(isVisible);
     };
 
-    // Observer to detect container visibility
     const observer = new ResizeObserver(checkVisibility);
     if (container.current) observer.observe(container.current);
 
@@ -32,63 +35,78 @@ export default function Hero({ paragraph }) {
   }, []);
 
   useEffect(() => {
-    let startY = 0; // Starting touch Y position
-    let touchDelta = 0; // Accumulated touch delta
+    let startY = 0;
+    let touchDelta = 0;
+    let velocity = 0;
 
     const handleScroll = (event) => {
       const delta = event.deltaY || event.wheelDelta || -event.detail;
 
       if (!isFullyVisible || scrollEnabled) {
-        return; // Allow normal scrolling if the text is not fully in viewport or scroll is enabled
+        return;
       }
 
-      event.preventDefault(); // Prevent default page scroll
-      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + delta * 0.001)); // Slower progression
+      event.preventDefault();
+      velocity = delta * 0.00025; // Adjust scrolling rate and initial velocity
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + velocity));
       scrollProgress.set(newScroll);
 
-      // Enable regular scroll once text is fully filled
       if (newScroll === 1) {
         setScrollEnabled(true);
       }
     };
 
     const handleTouchStart = (event) => {
-      startY = event.touches[0].clientY; // Record initial touch Y position
+      startY = event.touches[0].clientY;
     };
 
     const handleTouchMove = (event) => {
       if (!isFullyVisible || scrollEnabled) return;
 
       const currentY = event.touches[0].clientY;
-      touchDelta = startY - currentY; // Calculate vertical swipe delta
+      touchDelta = startY - currentY;
 
-      if (!scrollEnabled) {
-        event.preventDefault(); // Prevent default scrolling when the text is not fully revealed
-      }
+      event.preventDefault();
 
-      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.0005)); // Slower progression
+      velocity = touchDelta * 0.00025; // Adjust touch scrolling rate and initial velocity
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + velocity));
       scrollProgress.set(newScroll);
 
-      // Enable regular scroll once text is fully filled
       if (newScroll === 1) {
         setScrollEnabled(true);
       }
     };
 
     const handleTouchEnd = () => {
-      touchDelta = 0; // Reset touch delta
+      touchDelta = 0;
+      // Allow momentum to carry over
+      scrollProgress.set(scrollProgress.get() + velocity);
+    };
+
+    const applyMomentum = () => {
+      if (Math.abs(velocity) > 0.0001) {
+        velocity *= 0.95; // Decay the velocity for a smoother momentum effect
+        scrollProgress.set(Math.max(0, Math.min(1, scrollProgress.get() + velocity)));
+        requestAnimationFrame(applyMomentum);
+      }
+    };
+
+    const handleMomentum = () => {
+      applyMomentum();
     };
 
     window.addEventListener("wheel", handleScroll, { passive: false });
     window.addEventListener("touchstart", handleTouchStart, { passive: false });
     window.addEventListener("touchmove", handleTouchMove, { passive: false });
-    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd);
+    window.addEventListener("mouseup", handleMomentum);
 
     return () => {
       window.removeEventListener("wheel", handleScroll);
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchmove", handleTouchMove);
       window.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("mouseup", handleMomentum);
     };
   }, [scrollProgress, isFullyVisible, scrollEnabled]);
 
@@ -100,7 +118,7 @@ export default function Hero({ paragraph }) {
           const end = start + 1 / words.length;
 
           return (
-            <Word key={i} progress={scrollProgress} range={[start, end]}>
+            <Word key={i} progress={smoothScrollProgress} range={[start, end]}>
               {word}
             </Word>
           );
