@@ -60,7 +60,7 @@ export default function Hero({ paragraph }) {
       if (!isFullyVisible || scrollEnabled) return;
 
       const currentY = event.touches[0].clientY;
-      touchDelta = startY - currentY; // Calculate vertical swipe delta
+      touchDelta = startY - 2*currentY; // Calculate vertical swipe delta
 
       if (!scrollEnabled) {
         event.preventDefault(); // Prevent default scrolling when the text is not fully revealed
