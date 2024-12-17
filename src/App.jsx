@@ -66,7 +66,7 @@ const App = () => {
             </div>
           </div>
           <MouseScaleMain />
-          <MainComponent />
+         
         </main>
       </div>
       <SlidingImage />
