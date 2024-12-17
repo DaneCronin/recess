@@ -111,19 +111,31 @@ export default function Hero({ paragraph }) {
   }, [scrollProgress, isFullyVisible, scrollEnabled]);
 
   return (
-    <div className="w-full h-screen flex justify-center items-center overflow-hidden">
-      <p ref={container} className={`${styles.paragraph} text-xs md:text-sm`}>
-        {words.map((word, i) => {
-          const start = i / words.length;
-          const end = start + 1 / words.length;
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Video Background */}
+      <video
+        className="absolute top-0 left-0 w-full h-full object-cover z-0"
+        src="/video/section1video.mp4"
+        autoPlay
+        loop
+        muted
+      />
 
-          return (
-            <Word key={i} progress={smoothScrollProgress} range={[start, end]}>
-              {word}
-            </Word>
-          );
-        })}
-      </p>
+      {/* Content Layer */}
+      <div className="relative z-10 w-full h-full flex justify-center items-center">
+        <p ref={container} className={`${styles.paragraph} text-xs md:text-sm`}>
+          {words.map((word, i) => {
+            const start = i / words.length;
+            const end = start + 1 / words.length;
+
+            return (
+              <Word key={i} progress={smoothScrollProgress} range={[start, end]}>
+                {word}
+              </Word>
+            );
+          })}
+        </p>
+      </div>
     </div>
   );
 }

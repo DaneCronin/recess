@@ -51,6 +51,7 @@ const App = () => {
             transition: "opacity 0.3s",
           }}
         >
+          
           <Routes>
             <Route path="/" element={<Hero paragraph={paragraph} />} />
             <Route path="/about" element={<About />} />
