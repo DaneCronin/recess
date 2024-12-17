@@ -32,6 +32,9 @@ export default function Hero({ paragraph }) {
   }, []);
 
   useEffect(() => {
+    let startY = 0; // Starting touch Y position
+    let touchDelta = 0; // Accumulated touch delta
+
     const handleScroll = (event) => {
       const delta = event.deltaY || event.wheelDelta || -event.detail;
 
@@ -49,8 +52,40 @@ export default function Hero({ paragraph }) {
       }
     };
 
+    const handleTouchStart = (event) => {
+      startY = event.touches[0].clientY; // Record initial touch Y position
+    };
+
+    const handleTouchMove = (event) => {
+      if (!isFullyVisible || scrollEnabled) return;
+
+      const currentY = event.touches[0].clientY;
+      touchDelta = startY - currentY; // Calculate vertical swipe delta
+
+      const newScroll = Math.max(0, Math.min(1, scrollProgress.get() + touchDelta * 0.001));
+      scrollProgress.set(newScroll);
+
+      // Enable regular scroll once text is fully filled
+      if (newScroll === 1) {
+        setScrollEnabled(true);
+      }
+    };
+
+    const handleTouchEnd = () => {
+      touchDelta = 0; // Reset touch delta
+    };
+
     window.addEventListener("wheel", handleScroll, { passive: false });
-    return () => window.removeEventListener("wheel", handleScroll);
+    window.addEventListener("touchstart", handleTouchStart, { passive: false });
+    window.addEventListener("touchmove", handleTouchMove, { passive: false });
+    window.addEventListener("touchend", handleTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener("wheel", handleScroll);
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
   }, [scrollProgress, isFullyVisible, scrollEnabled]);
 
   useEffect(() => {
