@@ -55,7 +55,7 @@ export default function MouseScale({projects, reversed}) {
           <div className={styles.body}>
               <h3>{projects[0].name}</h3>
               <p>{projects[0].description}</p>
-              <p>{projects[0].year}</p>
+              <button className='bg-red-500 md:w-32 p-1 w-24 md:p-2 rounded-full m-2 md:text-sm text-xs text-white'>View Project</button>
           </div>
         </div>
   
@@ -70,7 +70,7 @@ export default function MouseScale({projects, reversed}) {
           <div className={styles.body}>
               <h3>{projects[1].name}</h3>
               <p>{projects[1].description}</p>
-              <p>{projects[1].year}</p>
+              <button className='bg-red-500 md:w-32 rounded-full p-1 w-24 md:p-2 m-2 text-white md:text-sm text-xs'>View Project</button>
           </div>
         </div>
   

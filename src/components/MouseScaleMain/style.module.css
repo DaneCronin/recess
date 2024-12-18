@@ -15,6 +15,11 @@
     word-wrap: break-word; /* Prevents cropping by wrapping long text */
     text-align: center; /* Aligns text for smaller screens */
   }
+  .gallery{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+   }
 
   img {
     max-width: 100%; /* Image fills container width */
