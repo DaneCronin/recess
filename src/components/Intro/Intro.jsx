@@ -12,55 +12,60 @@ export default function Index() {
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollTrigger);
 
+        // Helper function to set scrub based on device type
+        const getScrubValue = () => {
+            return window.matchMedia("(pointer: coarse)").matches ? 1.5 : true; // Smoother for touch devices
+        };
+
         // Animation for the background
         gsap.timeline({
             scrollTrigger: {
-                trigger: background.current, // Target background div
-                scrub: true, // Sync with scroll
-                start: "top +=100", // Start when top of the element hits the center
-                end: "+=300px", // End when bottom of the element hits the top
-                invalidateOnRefresh: true, // Refresh on resize
+                trigger: background.current,
+                scrub: getScrubValue(), // Adjust scrub value based on device
+                start: "top +=100",
+                end: "+=300px",
+                invalidateOnRefresh: true,
             },
         })
         .fromTo(
             background.current,
-            { clipPath: `inset(15%)` }, // Initial state
-            { clipPath: `inset(0%)` } // Final state
+            { clipPath: `inset(15%)` },
+            { clipPath: `inset(0%)` }
         );
 
         // Animation for the introImage
         gsap.timeline({
             scrollTrigger: {
-                trigger: introImage.current, // Target introImage div
-                scrub: true, // Sync with scroll
-                start: "top center-=150", // Start when top of the element enters the viewport
-                end: "bottom top+=300", // End when top of the element reaches the top
-                invalidateOnRefresh: true, // Refresh on resize
+                trigger: introImage.current,
+                scrub: getScrubValue(),
+                start: "top center-=150",
+                end: "bottom top+=300",
+                invalidateOnRefresh: true,
             },
         })
         .fromTo(
             introImage.current,
-            { y: "0%", opacity: 1, scale: 1 }, // Initial position
-            { y: "-100%", opacity: 0, scale: 0.95 } // Final state
+            { y: "0%", opacity: 1, scale: 1 },
+            { y: "-100%", opacity: 0, scale: 0.95 }
         );
 
         // Animation for the introText
         gsap.timeline({
             scrollTrigger: {
-                trigger: introText.current, // Target introText
-                scrub: true, // Sync with scroll
-                start: "top center", // Start when top of the element enters the viewport
-                end: "bottom top+=200", // End when top of the element reaches the center
-                invalidateOnRefresh: true, // Refresh on resize
+                trigger: introText.current,
+                scrub: getScrubValue(),
+                start: "top center",
+                end: "bottom top+=200",
+                invalidateOnRefresh: true,
             },
         })
         .fromTo(
             introText.current,
-            { opacity: 1 }, // Initial state
-            { opacity: 0 } // Final state
+            { opacity: 1 },
+            { opacity: 0 }
         );
 
-        // Ensure the animations sync properly with the scroll
+        // Refresh ScrollTrigger to ensure animations sync with device resize or orientation change
         ScrollTrigger.refresh();
     }, []);
 
