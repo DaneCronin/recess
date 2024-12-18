@@ -1,0 +1,7 @@
+.main{
+    display: flex;
+    height: 350vh;
+    background-color: black;
+    display: flex;
+flex-direction: column;
+gap: 20vh;}

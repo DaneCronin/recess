@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styles from './style.module.css';
 import Hero from "./Hero/Hero";
-import WebDesign from './pages/WebDesign'
+import WebDesign from './pages/webdesign/WebDesign'
 
 import SmoothScroll from "./components/SmoothScroll";
 import MouseScaleMain from "./components/MouseScaleMain/MouseScaleMain";
@@ -13,6 +13,8 @@ import SlidingImage from "./components/SlidingImages";
 import Contact from "./components/Contact";
 import Loader from "./components/Loader";
 import Home from "./Home";
+import ProductPhotoGraphy from "./pages/productPhotography/ProductPhotography";
+import Marketing from "./pages/marketing/Marketing";
 
 const App = () => {
  
@@ -57,6 +59,9 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home/>} />
             <Route path="/webdesign" element={<WebDesign/>} />
+            <Route path="/productphotography" element={<ProductPhotoGraphy />} />
+            <Route path="/marketing" element={<Marketing/>} />
+
 
           </Routes>
         </main>
