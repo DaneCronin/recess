@@ -1,6 +1,7 @@
 .main{
     display: flex;
     height: 350vh;
+    margin-bottom: 10vh;
     background-color: black;
     display: flex;
 flex-direction: column;

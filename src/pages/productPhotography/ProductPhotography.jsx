@@ -2,6 +2,7 @@ import React, { Suspense, lazy, useEffect } from "react";
 import styles from "./styles.module.css"; // Adjust the path to your CSS file
 import Lenis from "@studio-freight/lenis";
 import FramerMotionGsap from "./components/index";
+import Contact from "../../components/Contact";
 
 const Scene = lazy(() => import("../../components/Scene/Index")); // Adjust the path as needed
 
@@ -36,6 +37,7 @@ function ProductPhotoGraphy() {
         </div>
         <FramerMotionGsap/>
         <FramerMotionGsap />
+        <Contact/>
       </Suspense>
     </main>
   );
