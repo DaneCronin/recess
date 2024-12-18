@@ -11,9 +11,9 @@ export default function Contact() {
         target: container,
         offset: ["start end", "end end"]
     })
-    const x = useTransform(scrollYProgress, [0, 1], [0, 100])
-    const y = useTransform(scrollYProgress, [0, 1], [-500, 0])
-    const rotate = useTransform(scrollYProgress, [0, 1], [120, 90])
+    const x = useTransform(scrollYProgress, [0, 1], [0, 50])
+    const y = useTransform(scrollYProgress, [0, 1], [-100, 0])
+    const rotate = useTransform(scrollYProgress, [0, 1], [120, 100])
     return (
         <motion.div style={{y}} ref={container} className={styles.contact}>
             <div className={styles.body}>

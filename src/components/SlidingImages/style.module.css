@@ -64,4 +64,42 @@
     position: absolute;
     box-shadow: 0px 60px 50px rgba(0, 0, 0, 0.748);
   }
+  @media (max-width: 768px) {
+    .slidingImages{
+      height: 50vh;
+    }
+    .slider {
+      left: 0; /* Center the slides horizontally */
+      justify-content: center;
+      width: 100%; /* Match the container width for proper centering */
+      gap: 2vw; /* Reduce the gap between slides for smaller screens */
+      
+    }
   
+    .slider:last-of-type {
+      margin-bottom: 0px;
+            
+          }
+  
+    .project {
+      
+      width: 40%; /* Increase the size of the slides */
+      height: 40vw; /* Adjust height proportionally */
+    }
+  
+    .imageContainer {
+      width: 90%; /* Increase image container size */
+      height: 90%; /* Adjust height proportionally */
+    }
+  
+    .circle {
+      height: 1500%; /* Adjust circle dimensions */
+      width: 110%; /* Reduce width slightly for better alignment */
+      left: -5%; /* Adjust position */
+    }
+  
+    .slidingImages {
+      margin-top: 100px; /* Adjust margin to center vertically on smaller screens */
+      align-items: center; /* Center the container horizontally */
+    }
+  }
