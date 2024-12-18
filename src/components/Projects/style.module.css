@@ -80,8 +80,11 @@
     .column:last-of-type{
 
         right: 20px;
-        top: 50vh;
+        top: 30vh;
         width: 45%;
         
+    }
+    .projectList{
+        margin-top: 0px;
     }
 }
