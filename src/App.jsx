@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styles from './style.module.css';
 import Hero from "./Hero/Hero";
-
+import WebDesign from './pages/WebDesign'
 
 import SmoothScroll from "./components/SmoothScroll";
 import MouseScaleMain from "./components/MouseScaleMain/MouseScaleMain";
@@ -12,10 +12,10 @@ import ImageSlider from "./components/ImageSlideProjectGallery/ImageSlideProject
 import SlidingImage from "./components/SlidingImages";
 import Contact from "./components/Contact";
 import Loader from "./components/Loader";
+import Home from "./Home";
 
 const App = () => {
-  const paragraph =
-    "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.";
+ 
   const [isHeaderActive, setIsHeaderActive] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [isLoading, setIsLoading] = useState(true); // Loading state
@@ -34,13 +34,7 @@ const App = () => {
     document.body.style.overflow = isHeaderActive ? "hidden" : "auto";
   }, [isHeaderActive]);
 
-  const projects = [
-    { id: 1, title1: "Jomor", title2: "Design", src: "jomor_design.jpeg" },
-    { id: 2, title1: "La", title2: "Grange", src: "la_grange.jpeg" },
-    { id: 3, title1: "Deux Huit", title2: "Huit", src: "deux_huit_huit.jpeg" },
-    { id: 4, title1: "Nothing", title2: "Design Studio", src: "nothing_design_studio.png" },
-    { id: 5, title1: "Mambo", title2: "Mambo", src: "mambo_mambo.jpeg" },
-  ];
+  
 
   // Render loader if still loading
   if (isLoading) {
@@ -61,22 +55,10 @@ const App = () => {
           }}
         >
           <Routes>
-            <Route path="/" element={<Hero paragraph={paragraph} />} />
+            <Route path="/" element={<Home/>} />
+            <Route path="/webdesign" element={<WebDesign/>} />
 
           </Routes>
-
-          <SmoothScroll />
-          <div className={styles.main}>
-            <div className={styles.gallery}>
-              <p>Featured Work</p>
-              {projects.map((project) => {
-                return <ImageSlider key={project.id} project={project} />;
-              })}
-            </div>
-          </div>
-          <MouseScaleMain />
-          <SlidingImage />
-          <Contact />
         </main>
       </div>
     </Router>
