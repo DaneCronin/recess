@@ -30,7 +30,7 @@ function WebDesign() {
   }, []);
 
   return (
-    <main className={styles.main}>
+    <main className={styles.main} >
       <Suspense fallback={<div>Loading...</div>}>
         <div className="h-full">
           <Scene />

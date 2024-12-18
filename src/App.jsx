@@ -33,8 +33,14 @@ const App = () => {
 
   // Disable scrolling when header is active
   useEffect(() => {
-    document.body.style.overflow = isHeaderActive ? "hidden" : "auto";
+    const mainElement = document.querySelector('main');
+    if (isHeaderActive && mainElement) {
+      mainElement.style.overflow = "hidden"; // Disable scroll only for main content
+    } else if (mainElement) {
+      mainElement.style.overflow = "auto"; // Restore scroll
+    }
   }, [isHeaderActive]);
+  
 
   
 
@@ -47,12 +53,13 @@ const App = () => {
     <Router>
       <div style={{ position: "relative" }}>
         {/* Header */}
-        <Header setIsHeaderActive={setIsHeaderActive} isActive={isHeaderActive} />
+        <Header setIsHeaderActive={setIsHeaderActive} isActive={isHeaderActive}  />
 
         {/* Main content */}
         <main
-          style={{
+           style={{
             opacity: isHeaderActive ? 0.3 : 1,
+            pointerEvents: isHeaderActive ? "none" : "auto", // Disable interactions when header is active
             transition: "opacity 0.3s",
           }}
         >

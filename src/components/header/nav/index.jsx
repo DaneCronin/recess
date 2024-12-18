@@ -17,12 +17,12 @@ const navItems = [
     href: "/webdesign",
   },
   {
-    title: "About",
-    href: "/about",
+  title: "Product Photography",
+    href: "/productphotography",
   },
   {
-    title: "Contact",
-    href: "/contact",
+    title: "Marketing",
+    href: "/marketing",
   },
 ]
 
