@@ -2,13 +2,11 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import styles from './style.module.css';
 import Hero from "./Hero/Hero";
-import About from "./components/About";
-import Features from "./components/Features";
-import Projects from "./components/Story";
+
+
 import SmoothScroll from "./components/SmoothScroll";
 import MouseScaleMain from "./components/MouseScaleMain/MouseScaleMain";
-import MainComponent from "./components/TextDisperse/TextDisperse";
-import Footer from "./components/StickyNotes/StickyFooter";
+
 import Header from "./components/header";
 import ImageSlider from "./components/ImageSlideProjectGallery/ImageSlideProject";
 import SlidingImage from "./components/SlidingImages";
@@ -64,9 +62,7 @@ const App = () => {
         >
           <Routes>
             <Route path="/" element={<Hero paragraph={paragraph} />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/features" element={<Features />} />
-            <Route path="/projects" element={<Projects />} />
+
           </Routes>
 
           <SmoothScroll />
