@@ -1,0 +1,8 @@
+.main{
+    display: flex;
+    height: 450vh;
+    background-color: black;
+    margin-bottom: 10vh;
+    display: flex;
+flex-direction: column;
+gap: 20vh;}

@@ -1,0 +1,38 @@
+.paragraph{
+    display: flex;
+    font-size: 60px;
+    line-height: 1;
+    padding-left: 20px;
+    margin-top: 4rem;
+    margin-right: 10rem;
+    max-width: 1280px;
+    color: white;
+    flex-wrap: wrap;
+
+    @media (max-width: 640px) {
+        font-size: 30px;
+        padding: 20px;
+        margin: 0;
+    }
+
+    .word{
+      position: relative;
+      margin-right: 12px;
+      margin-top: 12px;
+      .shadow{
+        position: absolute;
+        opacity: 20%;
+      }
+    } 
+
+  }
+  .video-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+  }
+  

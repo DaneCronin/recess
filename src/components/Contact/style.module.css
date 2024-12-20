@@ -1,0 +1,222 @@
+.contact {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #141516;
+    position: relative;
+  
+    .body {
+      padding-top: 100px; /* Default padding */
+      width: 100%;
+      max-width: 1800px;
+      background-color: #141516;
+  
+      .title {
+        border-bottom: 1px solid rgb(134, 134, 134);
+        padding-bottom: 50px;
+        margin: 0 5%;
+        position: relative;
+  
+        span {
+          display: flex;
+          align-items: center;
+  
+          .imageContainer {
+            width: 80px;
+            height: 80px;
+            position: relative;
+            border-radius: 50%;
+            overflow: hidden;
+  
+            img {
+              object-fit: cover;
+            }
+          }
+  
+          h2 {
+            margin-left: 0.3em;
+            font-size: 4vw;
+          }
+        }
+  
+        h2 {
+          font-size: 5vw;
+          margin: 0;
+          font-weight: 300;
+        }
+  
+        .buttonContainer {
+          position: absolute;
+          left: calc(100% - 200px);
+          top: calc(100% - 50px);
+        }
+  
+        .button {
+          width: 100px;
+          height: 100px;
+          background-color: #455ce9;
+          color: white;
+          border-radius: 50%;
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+  
+          p {
+            margin: 0;
+            font-size: 14px;
+            font-weight: 300;
+            z-index: 2;
+            position: relative;
+          }
+        }
+  
+        svg {
+          position: absolute;
+          top: 30%;
+          left: 100%;
+        }
+      }
+  
+      .nav {
+        display: flex;
+        gap: 10px;
+        margin: 50px 5%;
+      }
+  
+      .info {
+        display: flex;
+        flex-direction: column;
+        margin-top: 100px;
+        padding: 20px;
+  
+        div {
+          display: flex;
+          gap: 10px;
+          align-items: flex-end;
+  
+          p,
+          h3 {
+            margin: 0;
+            padding: 2.5px;
+            cursor: pointer;
+          }
+  
+          p {
+            &::after {
+              content: "";
+              width: 0%;
+              height: 1px;
+              background-color: white;
+              display: block;
+              margin-top: 2px;
+              position: relative;
+              left: 50%;
+              transform: translateX(-50%);
+              transition: width 0.2s linear;
+            }
+  
+            &:hover {
+              &::after {
+                width: 100%;
+              }
+            }
+          }
+  
+          span {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+          }
+  
+          h3 {
+            color: grey;
+            cursor: default;
+            font-weight: 300;
+            font-size: 0.9em;
+          }
+        }
+      }
+    }
+  }
+  
+  /* Media Queries */
+  @media (max-width: 768px) {
+    .body {
+      margin: 0 auto;
+      max-width: 120vw; /* Match dimensions with slidingImages */
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .title {
+      margin: 0 2%;
+      padding-bottom: 30px;
+  
+      span {
+        .imageContainer {
+          width: 60px;
+          height: 60px;
+        }
+  
+        h2 {
+          font-size: 7vw;
+        }
+      }
+    }
+  
+    .nav {
+      flex-direction: column;
+      gap: 15px;
+      margin: 20px 2%;
+    }
+  
+    .info {
+      div {
+        span {
+          gap: 10px;
+        }
+        h3 {
+          font-size: 0.8em;
+        }
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .body {
+      padding-top: 0px;
+      max-width: 120vw; /* Maintain consistent dimensions */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .title {
+      span {
+        
+        h2 {
+          font-size: 8vw;
+        }
+      }
+  
+      .button {
+        width: 60px;
+        height: 60px;
+  
+        p {
+          font-size: 12px;
+        }
+      }
+    }
+  
+    .nav {
+      margin: 10px 2%;
+    }
+  }
+  

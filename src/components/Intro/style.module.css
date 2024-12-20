@@ -1,0 +1,70 @@
+.homeHeader {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Ensure this component takes up the full viewport height */
+    display: flex;
+    justify-content: center;
+    overflow: hidden; /* Prevents child overflow */
+}
+
+.backgroundImage {
+    width: 100%;
+    height: 100%; /* Matches the height of its parent (viewport height) */
+    position: absolute;
+    top: 0;
+    filter: brightness(60%);
+    overflow: hidden; /* Prevents content spilling out */
+}
+
+.backgroundImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures the image scales to cover the area */
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 2; /* Ensures it's above the background image */
+    margin-top: 0; /* No margin to avoid unintended spacing */
+    height: 100%; /* Takes full height of the parent */
+    text-align: center;
+}
+
+.intro h1 {
+    color: white;
+    font-size: 6vw; /* Scalable font size */
+    z-index: 3;
+    white-space: nowrap;
+    margin: 0;
+}
+
+.introImage {
+    filter: brightness(70%);
+    width: 270px;
+    height: 400px;
+    position: absolute;
+    z-index: 1;
+}
+
+.introImage img {
+    object-fit: fill;
+    object-position: top;
+    width: 100%;
+    height: 100%;
+}
+@media (max-width: 480px) {
+   
+    .introImage {
+        width: 60%; /* Further reduce the size of the image */
+        max-width: 150px; 
+        height: 40%;
+        object-fit: cover;/* Proportional scaling */
+    }
+
+    .intro h1 {
+        font-size: 10vw; /* Scale down font size further */
+    }
+}

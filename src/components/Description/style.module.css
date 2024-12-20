@@ -1,0 +1,19 @@
+.description{
+    position: relative;
+    color: white;
+    font-size: 3vw;
+    margin-top: -15vh;
+    text-transform: uppercase;
+    margin-left: 10vw;
+}
+.description p{
+    margin: 0px;
+    position: relative;
+}
+@media (max-width: 480px) {
+    .description{
+        margin-top: -8vh;
+        margin-left: 15vw;
+        
+    }
+}

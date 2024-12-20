@@ -1,0 +1,54 @@
+.main {
+  margin-top: 5vh;
+  color: white;
+  padding-bottom: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  h1 {
+    padding: 20px;
+    font-size: 5vw; 
+    max-width: 100%; /* Ensures text spans the full width */
+    font-weight: 400;
+    word-wrap: break-word; /* Prevents cropping by wrapping long text */
+    text-align: center; /* Aligns text for smaller screens */
+  }
+  .gallery{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+   }
+
+  img {
+    max-width: 100%; /* Image fills container width */
+    height: auto; /* Maintains aspect ratio */
+    object-fit: contain; /* Ensures the image is not cropped */
+  }
+
+  @media (max-width: 768px) {
+    margin-top: 3vh;
+    padding-bottom: 8vh;
+
+    h1 {
+      font-size: 6vw; /* Slightly larger font to keep proportion */
+      padding: 15px;  /* Reduce padding for better fit */
+    }
+  }
+
+  @media (max-width: 480px) {
+    margin-top: 2vh;
+    padding-bottom: 6vh;
+
+    h1 {
+      font-size: 7vw; /* Increase font size for smaller screens */
+      padding: 10px; /* Compact padding for better layout */
+    }
+   .gallery{
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+   }
+  }
+}
